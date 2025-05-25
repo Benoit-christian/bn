@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group input.error {
+            border-color: #e74c3c;
+            background: #ffeaea;
+        }
+
+        .input-group input.success {
+            border-color: #27ae60;
+            background: #eafaf1;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2 class="form-title">Welcome Back</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
+                <div class="error-message" id="nameError"></div>
+                <div class="success-message" id="nameSuccess"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <div class="error-message" id="emailError"></div>
+                <div class="success-message" id="emailSuccess"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <div class="error-message" id="passwordError"></div>
+                <div class="success-message" id="passwordSuccess"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+
+        <div class="form-footer">
+            <p>Don't have an account? <a href="#" style="color: #667eea; text-decoration: none;">Sign up</a></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        // Validation functions
+        function validateName(name) {
+            return name.trim().length >= 2;
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 6;
+        }
+
+        // Show error message
+        function showError(input, message) {
+            const errorElement = document.getElementById(input.id + 'Error');
+            const successElement = document.getElementById(input.id + 'Success');
+            
+            input.classList.add('error');
+            input.classList.remove('success');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            successElement.style.display = 'none';
+        }
+
+        // Show success message
+        function showSuccess(input, message = 'Looks good!') {
+            const errorElement = document.getElementById(input.id + 'Error');
+            const successElement = document.getElementById(input.id + 'Success');
+            
+            input.classList.add('success');
+            input.classList.remove('error');
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+            errorElement.style.display = 'none';
+        }
+
+        // Clear validation styles
+        function clearValidation(input) {
+            const errorElement = document.getElementById(input.id + 'Error');
+            const successElement = document.getElementById(input.id + 'Success');
+            
+            input.classList.remove('error', 'success');
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+        }
+
+        // Real-time validation
+        nameInput.addEventListener('input', function() {
+            const name = this.value.trim();
+            if (name === '') {
+                clearValidation(this);
+            } else if (validateName(name)) {
+                showSuccess(this);
+            } else {
+                showError(this, 'Name must be at least 2 characters long');
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            const email = this.value.trim();
+            if (email === '') {
+                clearValidation(this);
+            } else if (validateEmail(email)) {
+                showSuccess(this);
+            } else {
+                showError(this, 'Please enter a valid email address');
+            }
+        });
+
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            if (password === '') {
+                clearValidation(this);
+            } else if (validatePassword(password)) {
+                showSuccess(this);
+            } else {
+                showError(this, 'Password must be at least 6 characters long');
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            let isValid = true;
+
+            // Validate name
+            if (!name) {
+                showError(nameInput, 'Name is required');
+                isValid = false;
+            } else if (!validateName(name)) {
+                showError(nameInput, 'Name must be at least 2 characters long');
+                isValid = false;
+            }
+
+            // Validate email
+            if (!email) {
+                showError(emailInput, 'Email is required');
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showError(emailInput, 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Validate password
+            if (!password) {
+                showError(passwordInput, 'Password is required');
+                isValid = false;
+            } else if (!validatePassword(password)) {
+                showError(passwordInput, 'Password must be at least 6 characters long');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                // Shake the form container
+                document.querySelector('.form-container').classList.add('shake');
+                setTimeout(() => {
+                    document.querySelector('.form-container').classList.remove('shake');
+                }, 500);
+                return;
+            }
+
+            // If all validation passes
+            alert(`Form submitted successfully!\nName: ${name}\nEmail: ${email}\nPassword: ${'*'.repeat(password.length)}`);
+            
+            // Reset form
+            form.reset();
+            [nameInput, emailInput, passwordInput].forEach(input => clearValidation(input));
+        });
+
+        // Add focus effects
+        [nameInput, emailInput, passwordInput].forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
