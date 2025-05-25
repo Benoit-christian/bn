@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Rwanda - Discover Life in Rwanda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background: #333;
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2a5298;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234CAF50" width="1200" height="600"/><circle fill="%232196F3" cx="300" cy="150" r="80"/><circle fill="%23FF9800" cx="900" cy="200" r="60"/><polygon fill="%23795548" points="100,500 200,300 300,500"/><polygon fill="%23795548" points="800,500 900,250 1000,500"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #45a049;
+        }
+
+        /* Life in Rwanda Section */
+        .life-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .life-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .life-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .life-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .life-card h3 {
+            color: #2a5298;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: #f8f9fa;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Form */
+        .contact {
+            background: #2a5298;
+            color: white;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">🇷🇼 Visit Rwanda</div>
+            <div class="tagline">Land of a Thousand Hills</div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#life">Life in Rwanda</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Welcome to Rwanda</h1>
+            <p>Discover the beauty, culture, and warmth of the Land of a Thousand Hills</p>
+            <a href="#life" class="btn">Explore Life in Rwanda</a>
+        </div>
+    </section>
+
+    <!-- Life in Rwanda Section -->
+    <section id="life" class="container">
+        <h2 class="section-title">Life in Rwanda</h2>
+        <div class="life-grid">
+            <div class="life-card">
+                <img src="culture.jpg" alt="Rwandan Culture">
+                <h3>Rich Culture & Traditions</h3>
+                <p>Rwanda boasts a vibrant culture with traditional dance, music, and art. The Intore dancers and drummers showcase the country's rich heritage through captivating performances that tell stories of bravery and unity.</p>
+            </div>
+            
+            <div class="life-card">
+                <img src="city.jpg" alt="Modern Rwanda">
+                <h3>Modern Cities</h3>
+                <p>Kigali, the capital city, is known as one of Africa's cleanest and safest cities. With modern infrastructure, bustling markets, and friendly people, urban life in Rwanda offers a perfect blend of tradition and modernity.</p>
+            </div>
+            
+            <div class="life-card">
+                <img src="mountains.jpg" alt="Rwanda Landscape">
+                <h3>Breathtaking Nature</h3>
+                <p>From the misty mountains where mountain gorillas roam to the serene lakes and rolling hills, Rwanda's natural beauty is unmatched. The country offers incredible wildlife experiences and stunning landscapes.</p>
+            </div>
+            
+            <div class="life-card">
+                <img src="eductaion.jpg" alt="Education">
+                <h3>Education & Innovation</h3>
+                <p>Rwanda is rapidly becoming a hub for technology and innovation in Africa. With strong emphasis on education and digital transformation, the country is building a knowledge-based economy for the future.</p>
+            </div>
+            
+            <div class="life-card">
+                <img src="support.jpg" alt="Community">
+                <h3>Strong Community Spirit</h3>
+                <p>Rwandans are known for their strong sense of community and unity. The monthly Umuganda (community service) brings people together to work on community projects and strengthen social bonds.</p>
+            </div>
+            
+            <div class="life-card">
+                <img src="food.jpg" alt="Rwandan Food">
+                <h3>Delicious Cuisine</h3>
+                <p>Rwandan cuisine features fresh ingredients and unique flavors. From ubwoba (pumpkin) to igikoma (milk), and the famous Rwandan tea and coffee, the local food reflects the country's agricultural richness.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Discover Rwanda</h2>
+            <div class="gallery-grid">
+                <img src="gorrila.jpg" alt="Mountain Gorillas">
+                <img src="Lake-Kivu-Rwanda.jpg" alt="Lake Kivu">
+                <img src="city.jpg" alt="Kigali City">
+                <img src="dance.jpg" alt="Traditional Dance">
+                <img src="coffee.jpg" alt="Coffee Plantation">
+                <img src="nyungwe.webp" alt="Nyungwe Forest">
+                <img src="coffee.jpg" alt="Coffee Plantation">
+                <img src="nyungwe.webp" alt="Nyungwe Forest">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="form-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest">What interests you most about Rwanda?</label>
+                        <select id="interest" name="interest">
+                            <option value="">Select an option</option>
+                            <option value="culture">Culture & Traditions</option>
+                            <option value="wildlife">Wildlife & Nature</option>
+                            <option value="business">Business Opportunities</option>
+                            <option value="tourism">Tourism</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message:</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your interest in visiting Rwanda..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Visit Rwanda. All rights reserved. | Discover the beauty of the Land of a Thousand Hills</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for form handling and smooth scrolling
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Hero button smooth scroll
+        document.querySelector('.hero .btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('life').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                interest: document.getElementById('interest').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Simple validation
+            if (!formData.name || !formData.email || !formData.message) {
+                alert('Please fill in all required fields (Name, Email, and Message).');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Success message (in a real application, this would send data to a server)
+            alert('Thank you for your interest in Rwanda! Your message has been received. We will contact you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Add animation on scroll for cards
+        function animateOnScroll() {
+            const cards = document.querySelectorAll('.life-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s, transform 0.6s';
+                observer.observe(card);
+            });
+        }
+        
+        // Initialize animations when page loads
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
